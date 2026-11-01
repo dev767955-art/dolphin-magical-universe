@@ -1,0 +1,382 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dolphin's Magical Universe ✨</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Trebuchet MS', sans-serif;
+  background: linear-gradient(135deg, #10002b, #240046, #5a189a);
+  color: white;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.stars {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(white 1px, transparent 1px),
+    radial-gradient(#ffc8dd 1px, transparent 1px);
+  background-size: 55px 55px, 85px 85px;
+  animation: sparkle 8s linear infinite;
+}
+
+@keyframes sparkle {
+  from { background-position: 0 0, 0 0; }
+  to { background-position: 100px 200px, -100px 100px; }
+}
+
+.slide {
+  display: none;
+  position: relative;
+  z-index: 2;
+  height: 100vh;
+  width: 100%;
+  padding: 25px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+  animation: appear .7s ease;
+}
+
+.slide.active {
+  display: flex;
+}
+
+@keyframes appear {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+h1 {
+  color: #ffb3c6;
+  font-size: clamp(30px, 7vw, 55px);
+  text-shadow: 0 0 20px #ff70a6;
+}
+
+h2 {
+  color: #ffc8dd;
+  font-size: clamp(24px, 5vw, 38px);
+}
+
+p {
+  max-width: 650px;
+  line-height: 1.8;
+  font-size: 17px;
+  color: #fceaff;
+}
+
+button {
+  border: none;
+  border-radius: 30px;
+  padding: 13px 25px;
+  background: linear-gradient(90deg, #ff70a6, #c77dff);
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 0 15px #ff70a6;
+  transition: .3s;
+}
+
+button:hover {
+  transform: scale(1.07);
+}
+
+.buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.card {
+  background: rgba(255,255,255,.12);
+  border: 1px solid rgba(255,255,255,.3);
+  border-radius: 22px;
+  padding: 25px;
+  width: min(90%, 500px);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 25px rgba(255,150,220,.2);
+}
+
+.heart {
+  font-size: 65px;
+  animation: beat 1.3s infinite;
+}
+
+@keyframes beat {
+  50% { transform: scale(1.2); }
+}
+
+.gift {
+  font-size: 55px;
+  cursor: pointer;
+  padding: 10px;
+  transition: .3s;
+}
+
+.gift:hover {
+  transform: rotate(12deg) scale(1.2);
+}
+
+#message {
+  min-height: 50px;
+  color: #ffd6ff;
+  font-size: 18px;
+}
+
+#progress {
+  position: fixed;
+  z-index: 5;
+  top: 12px;
+  left: 0;
+  height: 4px;
+  width: 11.11%;
+  background: #ff8fab;
+  transition: width .4s;
+}
+
+.small {
+  color: #e7c6ff;
+  font-size: 13px;
+}
+
+@media(max-width: 500px) {
+  .slide { padding: 18px; }
+  p { font-size: 15px; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="stars"></div>
+<div id="progress"></div>
+
+<!-- SLIDE 1 -->
+<section class="slide active">
+  <div class="heart">💗</div>
+  <h1>Welcome DOLPHIN</h1>
+  <p>
+    Aaj tumhare liye ek chhoti si magical duniya banayi hai.
+    Is duniya mein stars, surprises aur kuch special wishes hain.
+  </p>
+  <button onclick="nextSlide()">Enter Your Universe ✨</button>
+  <div class="small">A little surprise made with care</div>
+</section>
+
+<!-- SLIDE 2 -->
+<section class="slide">
+  <h2>Dear DOLPHIN 💌</h2>
+  <div class="card">
+    <p>
+      Kabhi kabhi kuch log apni simple si presence se
+      din ko thoda brighter bana dete hain.
+      Tumhari smile aur tumhari kindness ki apni hi magic hai.
+      <br><br>
+      Ye website bas ek chhota sa reminder hai:
+      tumhari happiness important hai.
+    </p>
+    <br>
+    <p>— YOUR ALIEN 👽</p>
+  </div>
+  <button onclick="nextSlide()">Next Surprise 🌷</button>
+</section>
+
+<!-- SLIDE 3 -->
+<section class="slide">
+  <h2>Your Little Scrapbook 📸</h2>
+  <div class="card">
+    <p>🌸 Beautiful moments</p>
+    <p>🌙 Little memories</p>
+    <p>⭐ Random laughs</p>
+    <p>🦋 Sweet conversations</p>
+    <p>💫 Moments worth remembering</p>
+  </div>
+  <p>Yahan baad mein apni favourite photos add kar sakte ho.</p>
+  <button onclick="nextSlide()">Continue ✨</button>
+</section>
+
+<!-- SLIDE 4 -->
+<section class="slide">
+  <h2>A Garden of Compliments 🌷</h2>
+  <p>Flowers par click karo aur ek little surprise dekho.</p>
+  <div class="buttons">
+    <button onclick="flower(0)">🌹 Rose</button>
+    <button onclick="flower(1)">🌻 Sunflower</button>
+    <button onclick="flower(2)">🌸 Blossom</button>
+  </div>
+  <div id="message"></div>
+  <button onclick="nextSlide()">Next 🌙</button>
+</section>
+
+<!-- SLIDE 5 -->
+<section class="slide">
+  <h2>Choose Your Mystery Gift 🎁</h2>
+  <p>Koi bhi gift box choose karo!</p>
+  <div class="buttons">
+    <span class="gift" onclick="gift(0)">🎁</span>
+    <span class="gift" onclick="gift(1)">🎀</span>
+    <span class="gift" onclick="gift(2)">💝</span>
+  </div>
+  <div id="giftMessage" class="card">
+    Your surprise is waiting...
+  </div>
+  <button onclick="nextSlide()">Next Gift 🌟</button>
+</section>
+
+<!-- SLIDE 6 -->
+<section class="slide">
+  <h2>Catch the Star ⭐</h2>
+  <p>Star par click karo aur points collect karo!</p>
+  <h1 id="score">0</h1>
+  <button onclick="addScore()">⭐ Catch Me!</button>
+  <p id="gameMessage">Let's collect 10 stars!</p>
+  <button onclick="nextSlide()">Next 🚀</button>
+</section>
+
+<!-- SLIDE 7 -->
+<section class="slide">
+  <h2>Secret Messages 💜</h2>
+  <div class="card">
+    <p onclick="this.innerHTML='You deserve beautiful days and peaceful nights. 🌙'">
+      🔒 Secret 1 — Tap to open
+    </p>
+    <br>
+    <p onclick="this.innerHTML='Keep shining in your own unique way. ✨'">
+      🔒 Secret 2 — Tap to open
+    </p>
+    <br>
+    <p onclick="this.innerHTML='May your dreams find their way to you. 🦋'">
+      🔒 Secret 3 — Tap to open
+    </p>
+  </div>
+  <button onclick="nextSlide()">One Last Surprise 💫</button>
+</section>
+
+<!-- SLIDE 8 -->
+<section class="slide">
+  <h2>My Wishes for You 🌈</h2>
+  <div class="card">
+    <p>May your smile never fade. 🌸</p>
+    <p>May your dreams come true. ⭐</p>
+    <p>May you always find reasons to be happy. 🦋</p>
+    <p>May life surprise you beautifully. 💗</p>
+  </div>
+  <button onclick="nextSlide()">Final Surprise 🎉</button>
+</section>
+
+<!-- SLIDE 9 -->
+<section class="slide">
+  <div class="heart">🌌</div>
+  <h1>Stay Magical, DOLPHIN!</h1>
+  <div class="card">
+    <p>
+      This little universe was created just to bring
+      a smile to your face.
+      <br><br>
+      No expectations, just good wishes.
+      Keep being wonderfully you!
+    </p>
+    <br>
+    <h2>From YOUR ALIEN 👽</h2>
+  </div>
+  <button onclick="restart()">Watch Again ↻</button>
+</section>
+
+<script>
+let current = 0;
+const slides = document.querySelectorAll(".slide");
+
+function showSlide(index) {
+  slides[current].classList.remove("active");
+  current = index;
+  slides[current].classList.add("active");
+
+  document.getElementById("progress").style.width =
+    ((current + 1) / slides.length * 100) + "%";
+}
+
+function nextSlide() {
+  if (current < slides.length - 1) {
+    showSlide(current + 1);
+  }
+}
+
+function prevSlide() {
+  if (current > 0) {
+    showSlide(current - 1);
+  }
+}
+
+function restart() {
+  showSlide(0);
+}
+
+function flower(index) {
+  const messages = [
+    "Your kindness is like a beautiful rose. 🌹",
+    "You bring sunshine to ordinary days. 🌻",
+    "Your uniqueness makes the world brighter. 🌸"
+  ];
+  document.getElementById("message").textContent =
+    messages[index];
+}
+
+function gift(index) {
+  const gifts = [
+    "A pocket full of happiness! 💖",
+    "A sky full of stars for your dreams! 🌟",
+    "A little reminder that you matter! 💝"
+  ];
+  document.getElementById("giftMessage").textContent =
+    gifts[index];
+}
+
+let score = 0;
+
+function addScore() {
+  score++;
+  document.getElementById("score").textContent = score;
+
+  document.getElementById("gameMessage").textContent =
+    score >= 10
+    ? "You collected 10 stars! Superstar! 🌟"
+    : "Amazing! Keep collecting! ✨";
+}
+
+document.addEventListener("keydown", function(e) {
+  if (e.key === "ArrowRight") nextSlide();
+  if (e.key === "ArrowLeft") prevSlide();
+});
+
+let touchStart = 0;
+
+document.addEventListener("touchstart", function(e) {
+  touchStart = e.changedTouches[0].screenX;
+});
+
+document.addEventListener("touchend", function(e) {
+  const touchEnd = e.changedTouches[0].screenX;
+  const difference = touchStart - touchEnd;
+
+  if (difference > 60) nextSlide();
+  if (difference < -60) prevSlide();
+});
+</script>
+
+</body>
+</html>
