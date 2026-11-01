@@ -13,15 +13,14 @@
 *{box-sizing:border-box}
 html,body{margin:0;width:100%;height:100%;overflow:hidden}
 body{
- font-family:'DM Sans',sans-serif;
- color:#fff8ff;
+ font-family:'DM Sans',sans-serif;color:#fff8ff;
  background:
  radial-gradient(ellipse at 15% 15%,#633a78,transparent 40%),
  radial-gradient(ellipse at 85% 85%,#432d72,transparent 42%),
  linear-gradient(135deg,#160e29,#29173e,#170e2b);
 }
 button{font:inherit;cursor:pointer}
-#stars{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+#stars{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
 .star{
  position:absolute;width:3px;height:3px;border-radius:50%;
  background:white;animation:twinkle 3s infinite ease-in-out;
@@ -70,7 +69,7 @@ p{line-height:1.7;color:#eadcf3}
 }
 .photo{
  width:100%;height:clamp(120px,24vw,205px);object-fit:cover;
- border-radius:12px;background:#ffffff15;display:none;margin-bottom:9px;
+ border-radius:12px;background:#ffffff15;display:none;margin:10px 0;
 }
 .photo.show{display:block;animation:appear .4s ease}
 .reveal-button{margin-top:8px}
@@ -124,8 +123,8 @@ p{line-height:1.7;color:#eadcf3}
 <div id="stars"></div>
 <main id="app">
 
-<!-- SLIDE 1 -->
-<section class="slide active center" data-slide="0">
+<!-- SLIDE 1: WELCOME -->
+<section class="slide active center">
  <div class="kicker">A tiny surprise made with care</div>
  <div class="hero">🌸</div>
  <h1>Hey DOLPHIN!</h1>
@@ -134,8 +133,8 @@ p{line-height:1.7;color:#eadcf3}
  <div class="small" style="margin-top:20px">A little universe made just for you</div>
 </section>
 
-<!-- SLIDE 2 -->
-<section class="slide" data-slide="1">
+<!-- SLIDE 2: LETTER -->
+<section class="slide">
  <div class="progress"><span style="width:22%"></span></div>
  <div class="kicker">A little note</div>
  <h2>Ek chhota sa letter 💌</h2>
@@ -152,8 +151,8 @@ Hamesha khush rehna, apni smile banaye rakhna aur apne dreams ke peeche shine ka
  </div>
 </section>
 
-<!-- SLIDE 3 -->
-<section class="slide" data-slide="2">
+<!-- SLIDE 3: PHOTO SCRAPBOOK -->
+<section class="slide">
  <div class="progress"><span style="width:33%"></span></div>
  <div class="kicker">Little moments, big memories</div>
  <h2>Photo Scrapbook 📸</h2>
@@ -165,8 +164,8 @@ Hamesha khush rehna, apni smile banaye rakhna aur apne dreams ke peeche shine ka
  </div>
 </section>
 
-<!-- SLIDE 4 -->
-<section class="slide" data-slide="3">
+<!-- SLIDE 4: FLOWER GARDEN -->
+<section class="slide">
  <div class="progress"><span style="width:44%"></span></div>
  <div class="kicker">A garden of kind words</div>
  <h2>Garden of Compliments 🌷</h2>
@@ -184,8 +183,8 @@ Hamesha khush rehna, apni smile banaye rakhna aur apne dreams ke peeche shine ka
  </div>
 </section>
 
-<!-- SLIDE 5 -->
-<section class="slide" data-slide="4">
+<!-- SLIDE 5: MEMORIES OF GIFTS -->
+<section class="slide">
  <div class="progress"><span style="width:55%"></span></div>
  <div class="kicker">Little treasures</div>
  <h2>MEMORIES OF GIFTS 🎁</h2>
@@ -198,8 +197,8 @@ Hamesha khush rehna, apni smile banaye rakhna aur apne dreams ke peeche shine ka
  </div>
 </section>
 
-<!-- SLIDE 6 -->
-<section class="slide" data-slide="5">
+<!-- SLIDE 6: QUESTION ARENA -->
+<section class="slide">
  <div class="progress"><span style="width:66%"></span></div>
  <div class="kicker">Let's see what you remember</div>
  <h2>ARENA OF MEMORABLE QUESTIONS.....</h2>
@@ -213,8 +212,8 @@ Hamesha khush rehna, apni smile banaye rakhna aur apne dreams ke peeche shine ka
  </div>
 </section>
 
-<!-- SLIDE 7 -->
-<section class="slide" data-slide="6">
+<!-- SLIDE 7: SECRET MESSAGES -->
+<section class="slide">
  <div class="progress"><span style="width:77%"></span></div>
  <div class="kicker">A little message library</div>
  <h2>Secret Messages 💗</h2>
@@ -226,8 +225,8 @@ Hamesha khush rehna, apni smile banaye rakhna aur apne dreams ke peeche shine ka
  </div>
 </section>
 
-<!-- SLIDE 8 -->
-<section class="slide" data-slide="7">
+<!-- SLIDE 8: WISHES -->
+<section class="slide">
  <div class="progress"><span style="width:88%"></span></div>
  <div class="kicker">A few wishes for you</div>
  <h2>MY LITTLE WORLD OF WISHES ✨</h2>
@@ -252,14 +251,16 @@ Hamesha khush rehna, apni smile banaye rakhna aur apne dreams ke peeche shine ka
  </div>
 </section>
 
-<!-- SLIDE 9 -->
-<section class="slide center" data-slide="8">
+<!-- SLIDE 9: FINAL WISH -->
+<section class="slide center">
  <div class="progress"><span style="width:100%"></span></div>
  <div class="kicker">One last little surprise</div>
  <h2>Final Wish 💌</h2>
  <div class="envelope" id="envelope" onclick="openLetter()">💌</div>
  <p id="tap-hint">Tap the envelope to open your final message</p>
- <img class="final-photo" id="final-photo" src="images/Screenshot_20261101_102242_Gallery.jpg" alt="A special memory">
+ <img class="final-photo" id="final-photo"
+ src="Screenshot_20261101_102242_Gallery.jpg"
+ alt="A special memory">
  <div class="note" id="final-message" style="display:none;text-align:left">
 Hello..!!
 
@@ -276,49 +277,57 @@ I hope aapko ye mera chota sa surprise aacha laga hoga ! Yaar agar kuch aacha na
   <button class="btn" onclick="go(0)">Home ↺</button>
  </div>
 </section>
+
 </main>
 
 <script>
-// YOUR 9 PHOTOS
+// IMPORTANT: ALL 9 PHOTOS ARE IN THE REPOSITORY ROOT.
+// THEREFORE, DO NOT ADD "images/" BEFORE THESE FILENAMES.
+
 const files=[
- 'images/Screenshot_20261101_102058_Gallery.jpg',
- 'images/Screenshot_20261101_102102_Gallery.jpg',
- 'images/Screenshot_20261101_102106_Gallery.jpg',
- 'images/Screenshot_20261101_102109_Gallery.jpg',
- 'images/Screenshot_20261101_102200_Gallery.jpg',
- 'images/Screenshot_20261101_102203_Gallery.jpg',
- 'images/Screenshot_20261101_102207_Gallery.jpg',
- 'images/Screenshot_20261101_102230_Gallery.jpg',
- 'images/Screenshot_20261101_102242_Gallery.jpg'
+ 'Screenshot_20261101_102058_Gallery.jpg',
+ 'Screenshot_20261101_102102_Gallery.jpg',
+ 'Screenshot_20261101_102106_Gallery.jpg',
+ 'Screenshot_20261101_102109_Gallery.jpg',
+ 'Screenshot_20261101_102200_Gallery.jpg',
+ 'Screenshot_20261101_102203_Gallery.jpg',
+ 'Screenshot_20261101_102207_Gallery.jpg',
+ 'Screenshot_20261101_102230_Gallery.jpg',
+ 'Screenshot_20261101_102242_Gallery.jpg'
 ];
 
-// NAVIGATION
-function go(n){
- document.querySelectorAll('.slide').forEach((s,i)=>{
-  s.classList.toggle('active',i===n);
+// SLIDE NAVIGATION
+function go(number){
+ document.querySelectorAll('.slide').forEach((slide,index)=>{
+  slide.classList.toggle('active',index===number);
  });
 }
 
-// PHOTO SCRAPBOOK
+// PHOTO SCRAPBOOK: FIRST FOUR PHOTOS
 const scrapbook=document.getElementById('scrapbook');
+
 for(let i=0;i<4;i++){
  const box=document.createElement('div');
  box.className='tile';
+
  box.innerHTML=`
   <div>Memory ${i+1} 🌸</div>
   <img class="photo" src="${files[i]}" alt="Scrapbook memory ${i+1}">
   <button class="btn secondary reveal-button">Reveal photo</button>
  `;
+
  const img=box.querySelector('img');
  const btn=box.querySelector('button');
+
  btn.onclick=()=>{
   img.classList.add('show');
   btn.textContent='Memory revealed ✓';
  };
+
  scrapbook.appendChild(box);
 }
 
-// FLOWER SHAYARI
+// GARDEN OF COMPLIMENTS
 const poems=[
 `Na chand ki chahat, na sitaaron ki farmaish hai,
 Bas teri dosti rahe, itni si khwahish hai,
@@ -341,96 +350,158 @@ Khud ko samajhti hai Miss Universe ki queen,
 Par harkatein hain cartoon wali scene! 😅`
 ];
 
-function showPoem(i){
- const p=document.getElementById('poem');
- p.textContent=poems[i];
- p.animate([{opacity:.2,transform:'translateY(8px)'},{opacity:1,transform:'none'}],{duration:450});
+function showPoem(index){
+ const poem=document.getElementById('poem');
+ poem.textContent=poems[index];
+ poem.animate(
+  [{opacity:.2,transform:'translateY(8px)'},{opacity:1,transform:'none'}],
+  {duration:450}
+ );
 }
 
-// GIFT BOXES
+// MEMORIES OF GIFTS: PHOTOS FIVE TO EIGHT
 const gifts=document.getElementById('gifts');
+
 for(let i=4;i<8;i++){
- const b=document.createElement('button');
- b.className='gift';
- b.innerHTML=`<span>🎁</span>Gift ${i-3}`;
- b.onclick=()=>{
-  b.innerHTML=`<img src="${files[i]}" alt="Gift memory ${i-3}"><span>Memory ${i-3} 💗</span>`;
+ const button=document.createElement('button');
+ button.className='gift';
+ button.innerHTML=`<span>🎁</span>Gift ${i-3}`;
+
+ button.onclick=()=>{
+  button.innerHTML=`
+   <img src="${files[i]}" alt="Gift memory ${i-3}">
+   <span>Memory ${i-3} 💗</span>
+  `;
  };
- gifts.appendChild(b);
+
+ gifts.appendChild(button);
 }
 
 // MEMORY QUIZ
 const quiz=[
- ['Our favorite place?','Varanasi',['Varanasi','Patna','Delhi','Jaipur']],
- ['Our favorite fast food?','Momos',['Pizza','Momos','Burger','Noodles']],
- ['My bad behavior?','Jaldi gussa hona',['Late reply karna','Jaldi gussa hona','Zyada sona','Overthinking']],
- ['My favorite snack?','Kurkure',['Chips','Chocolate','Kurkure','Popcorn']],
- ['Our 1st meet up?','Inside the school',['At a cafe','Inside the school','At a park','At a mall']],
- ['Our second meet up?','Inside the school',['At a shop','At a park','Inside the school','At a cafe']],
- ['Aisa konsa 1st gift tha jo ki maine aapko diya tha?','Keychain',['Pen','Keychain','Flower','Chocolate']],
- ['Aisa kon sa 1st gift tha jo ki aapne mujhe diya tha?','KitKat chocolate',['Keychain','Notebook','KitKat chocolate','Teddy']]
+ ['Our favorite place?','Varanasi',
+  ['Varanasi','Patna','Delhi','Jaipur']],
+
+ ['Our favorite fast food?','Momos',
+  ['Pizza','Momos','Burger','Noodles']],
+
+ ['My bad behavior?','Jaldi gussa hona',
+  ['Late reply karna','Jaldi gussa hona','Zyada sona','Overthinking']],
+
+ ['My favorite snack?','Kurkure',
+  ['Chips','Chocolate','Kurkure','Popcorn']],
+
+ ['Our 1st meet up?','Inside the school',
+  ['At a cafe','Inside the school','At a park','At a mall']],
+
+ ['Our second meet up?','Inside the school',
+  ['At a shop','At a park','Inside the school','At a cafe']],
+
+ ['Aisa konsa 1st gift tha jo ki maine aapko diya tha?','Keychain',
+  ['Pen','Keychain','Flower','Chocolate']],
+
+ ['Aisa kon sa 1st gift tha jo ki aapne mujhe diya tha?','KitKat chocolate',
+  ['Keychain','Notebook','KitKat chocolate','Teddy']]
 ];
 
-let qi=0;
+let questionIndex=0;
+let questionLocked=false;
+
 function renderQuestion(){
- const q=quiz[qi];
- document.getElementById('q-count').textContent=`Question ${qi+1} of 8`;
- document.getElementById('question').textContent=q[0];
+ const current=quiz[questionIndex];
+
+ document.getElementById('q-count').textContent=
+  `Question ${questionIndex+1} of 8`;
+
+ document.getElementById('question').textContent=current[0];
  document.getElementById('toast').textContent='';
+
  const area=document.getElementById('answers');
  area.innerHTML='';
+ questionLocked=false;
 
- q[2].forEach(option=>{
-  const b=document.createElement('button');
-  b.className='answer';
-  b.textContent=option;
-  b.onclick=()=>{
-   if(option===q[1]){
-    b.classList.add('correct');
+ current[2].forEach(option=>{
+  const button=document.createElement('button');
+  button.className='answer';
+  button.textContent=option;
+
+  button.onclick=()=>{
+   if(questionLocked)return;
+
+   if(option===current[1]){
+    questionLocked=true;
+    button.classList.add('correct');
+
     document.getElementById('toast').textContent=
-      qi===7?'Perfect! You completed the arena! 🎉':'Correct! Next question unlocked ✨';
+     questionIndex===7
+     ?'Perfect! You completed the arena! 🎉'
+     :'Correct! Next question unlocked ✨';
+
     setTimeout(()=>{
-     if(qi<7){qi++;renderQuestion();}
-     else{
-      document.getElementById('question').textContent='You did it! All memories unlocked! 💗';
+     if(questionIndex<7){
+      questionIndex++;
+      renderQuestion();
+     }else{
+      document.getElementById('question').textContent=
+       'You did it! All memories unlocked! 💗';
+      document.getElementById('q-count').textContent=
+       'All 8 questions completed!';
       area.innerHTML='';
      }
-    },850);
+    },900);
+
    }else{
-    b.classList.add('wrong');
-    document.getElementById('toast').textContent='Not quite! Try again 💫';
-    setTimeout(()=>b.classList.remove('wrong'),300);
+    button.classList.add('wrong');
+    document.getElementById('toast').textContent=
+     'Not quite! Try again 💫';
+
+    setTimeout(()=>button.classList.remove('wrong'),300);
    }
   };
-  area.appendChild(b);
+
+  area.appendChild(button);
  });
 }
+
 renderQuestion();
 
-// SECRET MESSAGES
+// SECRET MESSAGE LIBRARY
 const messages=[
 'Bas itni si wish hai ki tumhari smile hamesha bani rahe, kyunki tumhari khushi dekhkar din aur bhi achha lagta hai.',
+
 'Har insaan ki apni ek alag pehchaan hoti hai, aur tumhara apna andaaz tumhe sach mein special banata hai.',
+
 'Kuch moments chhote hote hain, par unki yaadein bahut pyaari ban jaati hain. Tumhare saath bitaye moments bhi unmein se hain.',
+
 'Life mein chahe kitni bhi difficulties aayein, apni kindness aur apni beautiful personality kabhi mat khona. Keep shining!',
+
 'Thank you meri life mein itni saari cute memories aur little happiness add karne ke liye.',
+
 'Chahe hum kitni bhi baatein karein ya kabhi-kabhi misunderstandings ho jaayein, meri taraf se tumhare liye respect aur good wishes hamesha rahengi.',
+
 'Tumhare har naye din mein thodi si extra happiness, dher saari success aur bahut saari beautiful memories aayein.',
+
 'Tumhe shayad pata na ho, lekin tumhari presence meri ordinary si days ko bhi thoda memorable bana deti hai.'
 ];
 
 const secrets=document.getElementById('secrets');
-messages.forEach((message,i)=>{
- const d=document.createElement('div');
- d.className='secret';
- d.innerHTML=`
+
+messages.forEach((message,index)=>{
+ const card=document.createElement('div');
+ card.className='secret';
+
+ card.innerHTML=`
   <button>
-   <span class="front">💗 Secret ${i+1}<br><small>Tap to reveal</small></span>
+   <span class="front">💗 Secret ${index+1}<br><small>Tap to reveal</small></span>
    <span class="inside">${message}</span>
   </button>
  `;
- d.querySelector('button').onclick=()=>d.classList.toggle('open');
- secrets.appendChild(d);
+
+ card.querySelector('button').onclick=()=>{
+  card.classList.toggle('open');
+ };
+
+ secrets.appendChild(card);
 });
 
 // WISH CARDS
@@ -438,7 +509,7 @@ function toggleWish(button){
  button.parentElement.classList.toggle('open');
 }
 
-// FINAL ENVELOPE
+// FINAL ENVELOPE AND PHOTO
 function openLetter(){
  document.getElementById('envelope').style.display='none';
  document.getElementById('tap-hint').style.display='none';
@@ -446,18 +517,21 @@ function openLetter(){
  document.getElementById('final-message').style.display='block';
 }
 
-// FLOATING STARS
-const stars=document.getElementById('stars');
+// BACKGROUND STARS
+const starArea=document.getElementById('stars');
+
 for(let i=0;i<65;i++){
- const s=document.createElement('i');
- s.className='star';
- s.style.left=Math.random()*100+'%';
- s.style.top=Math.random()*100+'%';
- s.style.animationDelay=Math.random()*3+'s';
- s.style.opacity=.2+Math.random()*.7;
- stars.appendChild(s);
+ const star=document.createElement('i');
+ star.className='star';
+ star.style.left=Math.random()*100+'%';
+ star.style.top=Math.random()*100+'%';
+ star.style.animationDelay=Math.random()*3+'s';
+ star.style.opacity=.2+Math.random()*.7;
+ starArea.appendChild(star);
 }
 </script>
+
 </body>
 </html>
+
 
