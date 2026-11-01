@@ -284,17 +284,19 @@ I hope aapko ye mera chota sa surprise aacha laga hoga ! Yaar agar kuch aacha na
 // IMPORTANT: ALL 9 PHOTOS ARE IN THE REPOSITORY ROOT.
 // THEREFORE, DO NOT ADD "images/" BEFORE THESE FILENAMES.
 
-const files=[
- 'Screenshot_20261101_102058_Gallery.jpg',
- 'Screenshot_20261101_102102_Gallery.jpg',
- 'Screenshot_20261101_102106_Gallery.jpg',
- 'Screenshot_20261101_102109_Gallery.jpg',
- 'Screenshot_20261101_102200_Gallery.jpg',
- 'Screenshot_20261101_102203_Gallery.jpg',
- 'Screenshot_20261101_102207_Gallery.jpg',
- 'Screenshot_20261101_102230_Gallery.jpg',
- 'Screenshot_20261101_102242_Gallery.jpg'
+const files = [
+  'Screenshot_20261101_102058_Gallery.jpg',
+  'Screenshot_20261101_102102_Gallery.jpg',
+  'Screenshot_20261101_102106_Gallery.jpg',
+  'Screenshot_20261101_102109_Gallery.jpg',
+  'Screenshot_20261101_102200_Gallery.jpg',
+  'Screenshot_20261101_102203_Gallery.jpg',
+  'Screenshot_20261101_102207_Gallery.jpg',
+  'Screenshot_20261101_102230_Gallery.jpg',
+  'Screenshot_20261101_102242_Gallery.jpg'
 ];
+
+const photoPath = file => encodeURI(file);
 
 // SLIDE NAVIGATION
 function go(number){
