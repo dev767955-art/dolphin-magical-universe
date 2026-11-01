@@ -4,286 +4,456 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#190e2e">
-<title>DOLPHIN | A Magical Universe</title>
+<title>Dolphin Magical Universe</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap');
+* {
+  box-sizing: border-box;
+}
 
-*{box-sizing:border-box}
-html,body{margin:0;width:100%;height:100%;overflow:hidden}
-body{
- font-family:'DM Sans',sans-serif;color:#fff8ff;
- background:
- radial-gradient(ellipse at 15% 15%,#633a78,transparent 40%),
- radial-gradient(ellipse at 85% 85%,#432d72,transparent 42%),
- linear-gradient(135deg,#160e29,#29173e,#170e2b);
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Trebuchet MS', Arial, sans-serif;
+  color: #fff;
+  background: linear-gradient(135deg, #170b35, #4b1d66, #a04478);
+  overflow-x: hidden;
 }
-button{font:inherit;cursor:pointer}
-#stars{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
-.star{
- position:absolute;width:3px;height:3px;border-radius:50%;
- background:white;animation:twinkle 3s infinite ease-in-out;
-}
-@keyframes twinkle{50%{opacity:.15;transform:scale(.5)}}
-#app{
- position:relative;z-index:1;height:100%;width:100%;
- display:flex;align-items:center;justify-content:center;padding:12px;
-}
-.slide{
- display:none;width:min(900px,100%);height:min(760px,100%);
- overflow:auto;border:1px solid #ffffff30;border-radius:26px;
- background:linear-gradient(145deg,#ffffff20,#ffffff09);
- box-shadow:0 25px 80px #0005;
- backdrop-filter:blur(18px);padding:clamp(18px,4vw,38px);
-}
-.slide.active{display:flex;flex-direction:column;animation:appear .45s ease}
-@keyframes appear{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:none}}
-h1,h2,h3{font-family:'Playfair Display',serif;line-height:1.15;margin:0 0 14px}
-h1{font-size:clamp(2.5rem,8vw,4.6rem)}
-h2{font-size:clamp(1.7rem,5vw,2.7rem)}
-p{line-height:1.7;color:#eadcf3}
-.kicker{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:#ffd0e6;font-weight:800;margin-bottom:13px}
-.center{justify-content:center;align-items:center;text-align:center}
-.hero{font-size:5rem;filter:drop-shadow(0 0 20px #ff9fc9);animation:float 4s infinite}
-@keyframes float{50%{transform:translateY(-12px) rotate(4deg)}}
-.btn{
- border:1px solid #ffffff40;border-radius:30px;padding:12px 20px;
- background:linear-gradient(120deg,#ff8cbd,#b69aff);
- color:#29152f;font-weight:800;transition:.2s;
-}
-.btn:hover{transform:translateY(-2px);filter:brightness(1.1)}
-.btn.secondary{background:#ffffff16;color:white;box-shadow:none}
-.nav{display:flex;justify-content:space-between;gap:10px;margin-top:auto;padding-top:20px}
-.nav .btn{min-width:100px}
-.progress{height:4px;background:#ffffff20;border-radius:10px;margin-bottom:22px;overflow:hidden}
-.progress span{display:block;height:100%;background:linear-gradient(90deg,#ff9fc9,#b99aff)}
-.note{
- background:#ffffff12;border:1px solid #ffffff25;border-radius:17px;
- padding:17px;line-height:1.8;white-space:pre-line;color:#fff0f8;
-}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.tile,.card{
- background:#ffffff12;border:1px solid #ffffff25;border-radius:17px;
- padding:12px;text-align:center;
-}
-.photo{
- width:100%;height:clamp(120px,24vw,205px);object-fit:cover;
- border-radius:12px;background:#ffffff15;display:none;margin:10px 0;
-}
-.photo.show{display:block;animation:appear .4s ease}
-.reveal-button{margin-top:8px}
-.flowers{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin:12px 0}
-.flower,.gift,.answer{
- border:1px solid #ffffff30;background:#ffffff12;color:white;
- border-radius:15px;padding:12px 5px;
-}
-.flower span{display:block;font-size:2.4rem;margin-bottom:6px}
-.gift-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:12px 0}
-.gift{font-size:1rem;min-width:0}
-.gift span{display:block;font-size:2.4rem;margin-bottom:5px}
-.gift img{width:100%;height:125px;object-fit:cover;border-radius:10px}
-.answers{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-.answer{padding:13px}
-.answer.correct{background:#2b966b55;border-color:#9cf2c8}
-.answer.wrong{animation:shake .25s}
-@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
-.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-.secret button{
- width:100%;min-height:105px;border-radius:15px;
- background:linear-gradient(130deg,#ff9fc925,#b99aff25);
- border:1px solid #ffffff30;color:white;padding:13px;
-}
-.secret .inside{display:none;line-height:1.6}
-.secret.open .front{display:none}
-.secret.open .inside{display:block;animation:appear .4s}
-.wish{border:1px solid #ffffff25;background:#ffffff10;border-radius:15px;padding:13px}
-.wish button{background:none;border:0;color:#ffd1e7;font-weight:800;text-align:left}
-.wish p{display:none;margin:10px 0 0}
-.wish.open p{display:block}
-.envelope{font-size:5rem;cursor:pointer;animation:float 3s infinite;filter:drop-shadow(0 0 20px #ff9fc9)}
-.final-photo{width:min(290px,100%);max-height:210px;object-fit:cover;border-radius:16px;margin:12px auto;display:none}
-#toast{min-height:26px;text-align:center;color:#ffd0e6;font-weight:700;margin-top:10px}
-.small{font-size:.8rem;color:#e5d7f0}
 
-@media(max-width:560px){
- #app{padding:7px}
- .slide{padding:17px 14px;border-radius:20px}
- .flowers{grid-template-columns:repeat(2,1fr)}
- .gift-grid{grid-template-columns:repeat(2,1fr)}
- .gift img{height:145px}
- .nav .btn{min-width:0;flex:1;padding:11px 10px}
- .answers{gap:8px}
- .answer{padding:11px 7px;font-size:.9rem}
+.slide {
+  display: none;
+  min-height: 100vh;
+  width: 100%;
+  padding: 25px 16px 35px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.slide.active {
+  display: flex;
+}
+
+h1 {
+  color: #ffd6f0;
+  font-size: clamp(26px, 7vw, 38px);
+  text-shadow: 0 0 15px #ff8acb;
+}
+
+h2 {
+  color: #ffe0f2;
+}
+
+p {
+  line-height: 1.8;
+  max-width: 650px;
+}
+
+.panel {
+  width: 100%;
+  max-width: 650px;
+  padding: 22px;
+  border: 1px solid rgba(255,255,255,.3);
+  border-radius: 22px;
+  background: rgba(255,255,255,.12);
+  box-shadow: 0 0 25px rgba(255,140,210,.2);
+  backdrop-filter: blur(8px);
+}
+
+button {
+  border: none;
+  border-radius: 30px;
+  padding: 12px 20px;
+  margin: 7px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #5b1648;
+  background: #ffd0eb;
+  transition: .2s;
+}
+
+button:active {
+  transform: scale(.96);
+}
+
+button:hover {
+  background: #fff;
+}
+
+.btn-secondary {
+  background: #f5b4e0;
+}
+
+.navigation {
+  margin-top: 20px;
+}
+
+.navigation button {
+  min-width: 85px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 13px;
+  width: 100%;
+  max-width: 650px;
+  margin-top: 15px;
+}
+
+.tile {
+  padding: 13px;
+  border-radius: 17px;
+  background: rgba(255,255,255,.15);
+  border: 1px solid rgba(255,255,255,.25);
+  overflow: hidden;
+}
+
+.photo {
+  display: none;
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  max-height: 320px;
+  object-fit: contain;
+  border-radius: 13px;
+  margin: 12px auto;
+  background: rgba(0,0,0,.15);
+}
+
+.photo.show {
+  display: block !important;
+}
+
+.message {
+  display: none;
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(255,255,255,.16);
+  line-height: 1.7;
+}
+
+.message.show {
+  display: block;
+}
+
+.flower {
+  font-size: 35px;
+  cursor: pointer;
+}
+
+.question {
+  font-size: 19px;
+  font-weight: bold;
+  margin: 15px 0;
+}
+
+.answer {
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  margin: 9px auto;
+}
+
+.small-note {
+  font-size: 13px;
+  opacity: .85;
+}
+
+.envelope {
+  font-size: 85px;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+}
+
+#finalMessage {
+  display: none;
+}
+
+#finalMessage.show {
+  display: block;
+}
+
+@media(max-width: 420px) {
+  .grid {
+    gap: 9px;
+  }
+
+  .tile {
+    padding: 9px;
+  }
+
+  button {
+    padding: 11px 15px;
+    font-size: 14px;
+  }
 }
 </style>
 </head>
 
 <body>
-<div id="stars"></div>
-<main id="app">
 
 <!-- SLIDE 1: WELCOME -->
-<section class="slide active center">
- <div class="kicker">A tiny surprise made with care</div>
- <div class="hero">🌸</div>
- <h1>Hey DOLPHIN!</h1>
- <p>Tumhare liye ek chhoti si magical duniya banayi hai. Har page mein kuch special chhupa hai. So, are you ready?</p>
- <button class="btn" onclick="go(1)">LET'S BEGIN ✨</button>
- <div class="small" style="margin-top:20px">A little universe made just for you</div>
+<section class="slide active">
+  <div class="panel">
+    <h1>Welcome to My Magical Universe 🌸</h1>
+    <h2>Hey DOLPHIN!</h2>
+    <p>
+      Tumhare liye ek chhoti si magical duniya banayi hai.
+      Har page mein kuch special chhupa hai.
+      So, are you ready?
+    </p>
+    <button onclick="go(1)">LET'S BEGIN ✨</button>
+  </div>
 </section>
 
 <!-- SLIDE 2: LETTER -->
 <section class="slide">
- <div class="progress"><span style="width:22%"></span></div>
- <div class="kicker">A little note</div>
- <h2>Ek chhota sa letter 💌</h2>
- <div class="note">Dear DOLPHIN,
-
-Kabhi-kabhi kuch log bina kisi special reason ke bhi hamare din ko better bana dete hain. Tumhari dosti, tumhari funny baatein aur saath bitaye chhote-chhote moments mere liye kaafi special hain.
-
-Ye website bas ek chhota sa thank-you hai — un smiles, memories aur happiness ke liye jo tumne add ki hai.
-
-Hamesha khush rehna, apni smile banaye rakhna aur apne dreams ke peeche shine karte rehna. 🌷</div>
- <div class="nav">
-  <button class="btn secondary" onclick="go(0)">← Back</button>
-  <button class="btn" onclick="go(2)">Next →</button>
- </div>
+  <div class="panel">
+    <h1>A Little Letter 💌</h1>
+    <p>
+      Dear DOLPHIN,
+      <br><br>
+      Kabhi-kabhi kuch log hamari life mein aate hain
+      aur apne cute se andaaz se ordinary moments ko
+      special bana dete hain.
+      <br><br>
+      Tumhare saath bitaye hue moments aur chhoti-chhoti
+      memories mere liye bahut special hain.
+      <br><br>
+      Ye website meri taraf se ek little surprise hai.
+      Isse banane mein maine apni taraf se poori koshish
+      ki hai. I hope tumhe pasand aaye!
+      <br><br>
+      Always keep smiling and shining. 🌸
+    </p>
+    <h2>With lots of good wishes!</h2>
+  </div>
+  <div class="navigation">
+    <button onclick="go(0)">Back</button>
+    <button onclick="go(2)">Next</button>
+  </div>
 </section>
 
 <!-- SLIDE 3: PHOTO SCRAPBOOK -->
 <section class="slide">
- <div class="progress"><span style="width:33%"></span></div>
- <div class="kicker">Little moments, big memories</div>
- <h2>Photo Scrapbook 📸</h2>
- <p>Har button ke peeche ek memory chhupi hai. Tap karke dekho!</p>
- <div class="grid" id="scrapbook"></div>
- <div class="nav">
-  <button class="btn secondary" onclick="go(1)">← Back</button>
-  <button class="btn" onclick="go(3)">Next →</button>
- </div>
+  <div class="panel">
+    <h1>Our Photo Scrapbook 📸</h1>
+    <p>Har photo ke peeche ek cute si memory hai!</p>
+    <div class="grid" id="scrapbook"></div>
+  </div>
+  <div class="navigation">
+    <button onclick="go(1)">Back</button>
+    <button onclick="go(0)">Home</button>
+    <button onclick="go(3)">Next</button>
+  </div>
 </section>
 
-<!-- SLIDE 4: FLOWER GARDEN -->
+<!-- SLIDE 4: GARDEN OF COMPLIMENTS -->
 <section class="slide">
- <div class="progress"><span style="width:44%"></span></div>
- <div class="kicker">A garden of kind words</div>
- <h2>Garden of Compliments 🌷</h2>
- <p>Ek flower choose karo — uske saath ek chhoti si shayari khilegi.</p>
- <div class="flowers">
-  <button class="flower" onclick="showPoem(0)"><span>🌹</span>Rose</button>
-  <button class="flower" onclick="showPoem(1)"><span>🌷</span>Pink Tulip</button>
-  <button class="flower" onclick="showPoem(2)"><span>🌸</span>Cherry Blossom</button>
-  <button class="flower" onclick="showPoem(3)"><span>🪷</span>Pink Peony</button>
- </div>
- <div class="note" id="poem">Choose a flower to reveal your shayari ✨</div>
- <div class="nav">
-  <button class="btn secondary" onclick="go(2)">← Back</button>
-  <button class="btn" onclick="go(4)">Next →</button>
- </div>
+  <div class="panel">
+    <h1>Garden of Compliments 🌷</h1>
+    <p>Flowers par tap karo aur apni shayari reveal karo!</p>
+
+    <div class="grid">
+      <div class="tile">
+        <div class="flower" onclick="reveal('rose')">🌹</div>
+        <h3>Rose</h3>
+        <div class="message" id="rose">
+          Na chand ki chahat, na sitaaron ki farmaish hai,<br>
+          Bas teri dosti rahe, itni si khwahish hai,<br>
+          Tu hasti rahe hamesha yunhi,<br>
+          Teri smile hi toh sabse pyari numaish hai.
+        </div>
+      </div>
+
+      <div class="tile">
+        <div class="flower" onclick="reveal('tulip')">🌷</div>
+        <h3>Pink Tulip</h3>
+        <div class="message" id="tulip">
+          Teri saadgi mein bhi ek alag andaaz hai,<br>
+          Teri baaton mein jaise koi meetha sa raaz hai,<br>
+          Khoobsurati ki tareef toh sab karte hain,<br>
+          Par tera nature hi tera sabse haseen andaaz hai.
+        </div>
+      </div>
+
+      <div class="tile">
+        <div class="flower" onclick="reveal('cherry')">🌸</div>
+        <h3>Cherry Blossom</h3>
+        <div class="message" id="cherry">
+          Na rishton ka naam zaroori hai,<br>
+          Na har baat ka paigaam zaroori hai,<br>
+          Bas kuch log dil mein jagah bana lete hain,<br>
+          Unka zindagi mein hona hi khaas zaroori hai.
+        </div>
+      </div>
+
+      <div class="tile">
+        <div class="flower" onclick="reveal('peony')">🌺</div>
+        <h3>Pink Peony</h3>
+        <div class="message" id="peony">
+          Kabhi attitude dikhati hai, kabhi pyaar jatati hai,<br>
+          Bina baat ke mera dimaag khati hai,<br>
+          Khud ko samajhti hai Miss Universe ki queen,<br>
+          Par harkatein hain cartoon wali scene! 😅
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="navigation">
+    <button onclick="go(2)">Back</button>
+    <button onclick="go(0)">Home</button>
+    <button onclick="go(4)">Next</button>
+  </div>
 </section>
 
 <!-- SLIDE 5: MEMORIES OF GIFTS -->
 <section class="slide">
- <div class="progress"><span style="width:55%"></span></div>
- <div class="kicker">Little treasures</div>
- <h2>MEMORIES OF GIFTS 🎁</h2>
- <p>Four little gift boxes, four memories. Open each one!</p>
- <div class="gift-grid" id="gifts"></div>
- <div class="note" style="text-align:center">Our Cute Memories With Your And My Gifts!</div>
- <div class="nav">
-  <button class="btn secondary" onclick="go(3)">← Back</button>
-  <button class="btn" onclick="go(5)">Next →</button>
- </div>
+  <div class="panel">
+    <h1>MEMORIES OF GIFTS 🎁</h1>
+    <p>Gift boxes par tap karo aur memories dekho!</p>
+    <h3>Our Cute Memories With Your And My Gifts!</h3>
+    <div class="grid" id="giftGallery"></div>
+  </div>
+  <div class="navigation">
+    <button onclick="go(3)">Back</button>
+    <button onclick="go(0)">Home</button>
+    <button onclick="go(5)">Next</button>
+  </div>
 </section>
 
-<!-- SLIDE 6: QUESTION ARENA -->
+<!-- SLIDE 6: QUIZ -->
 <section class="slide">
- <div class="progress"><span style="width:66%"></span></div>
- <div class="kicker">Let's see what you remember</div>
- <h2>ARENA OF MEMORABLE QUESTIONS.....</h2>
- <div class="small" id="q-count">Question 1 of 8</div>
- <div id="question" style="font-size:1.2rem;font-weight:800;margin:15px 0"></div>
- <div class="answers" id="answers"></div>
- <div id="toast"></div>
- <div class="nav">
-  <button class="btn secondary" onclick="go(4)">← Back</button>
-  <button class="btn" onclick="go(6)">Next →</button>
- </div>
+  <div class="panel">
+    <h1>ARENA OF MEMORABLE QUESTIONS.....</h1>
+    <p>Chalo dekhte hain kitni memories yaad hain!</p>
+    <div id="quizArea">
+      <div class="question" id="question"></div>
+      <div id="answers"></div>
+      <p id="quizFeedback"></p>
+      <p id="quizCount"></p>
+    </div>
+  </div>
+  <div class="navigation">
+    <button onclick="go(4)">Back</button>
+    <button onclick="go(0)">Home</button>
+    <button onclick="go(6)">Next</button>
+  </div>
 </section>
 
 <!-- SLIDE 7: SECRET MESSAGES -->
 <section class="slide">
- <div class="progress"><span style="width:77%"></span></div>
- <div class="kicker">A little message library</div>
- <h2>Secret Messages 💗</h2>
- <p>Cards tap karo aur hidden messages reveal karo.</p>
- <div class="cards" id="secrets"></div>
- <div class="nav">
-  <button class="btn secondary" onclick="go(5)">← Back</button>
-  <button class="btn" onclick="go(7)">Next →</button>
- </div>
+  <div class="panel">
+    <h1>Secret Messages 💌</h1>
+    <p>Har card mein ek little message chhupa hai!</p>
+    <div class="grid" id="secretGallery"></div>
+  </div>
+  <div class="navigation">
+    <button onclick="go(5)">Back</button>
+    <button onclick="go(0)">Home</button>
+    <button onclick="go(7)">Next</button>
+  </div>
 </section>
 
 <!-- SLIDE 8: WISHES -->
 <section class="slide">
- <div class="progress"><span style="width:88%"></span></div>
- <div class="kicker">A few wishes for you</div>
- <h2>MY LITTLE WORLD OF WISHES ✨</h2>
- <div style="display:grid;gap:11px">
-  <div class="wish">
-   <button onclick="toggleWish(this)">🌸 A little compliment — tap to reveal</button>
-   <p>Tumhari simplicity, tumhari kindness aur tumhara apna alag sa andaaz tumhe bahut special banata hai. Hamesha apni beautiful personality ke saath shine karti rehna.</p>
+  <div class="panel">
+    <h1>MY LITTLE WORLD OF WISHES ✨</h1>
+
+    <div class="tile">
+      <h3>My Compliment 🌸</h3>
+      <button onclick="reveal('wish1')">Reveal</button>
+      <div class="message" id="wish1">
+        Tumhari simplicity, tumhari kindness aur tumhara
+        apna alag sa andaaz tumhe bahut special banata hai.
+        Hamesha apni beautiful personality ke saath shine
+        karti rehna.
+      </div>
+    </div>
+
+    <div class="tile">
+      <h3>My Little Thank You 💗</h3>
+      <button onclick="reveal('wish2')">Reveal</button>
+      <div class="message" id="wish2">
+        Thank you for coming into my life and being my
+        someone special.
+      </div>
+    </div>
+
+    <div class="tile">
+      <h3>One Little Request 💌</h3>
+      <button onclick="reveal('wish3')">Reveal</button>
+      <div class="message" id="wish3">
+        Saare misunderstandings ko bhul kar har mistakes
+        ko maaf kar ke mere sath hamesha rehna please
+        kabhi chhor ke mat jana ! Aapko bahut miss karta hu !
+      </div>
+    </div>
+
+    <h2>................. YOUR ALIEN,,,, from mars..!!</h2>
   </div>
-  <div class="wish">
-   <button onclick="toggleWish(this)">💗 A little thank you — tap to reveal</button>
-   <p>Thank you for coming into my life and being my someone special.</p>
+  <div class="navigation">
+    <button onclick="go(6)">Back</button>
+    <button onclick="go(0)">Home</button>
+    <button onclick="go(8)">Next</button>
   </div>
-  <div class="wish">
-   <button onclick="toggleWish(this)">🕊️ One heartfelt wish — tap to reveal</button>
-   <p>Saare misunderstandings ko bhul kar har mistakes ko maaf kar ke mere sath hamesha rehna please kabhi chhor ke mat jana ! Aapko bahut miss karta hu !</p>
-  </div>
- </div>
- <div class="note" style="text-align:center;margin-top:13px">................. YOUR ALIEN,,,, from mars..!!</div>
- <div class="nav">
-  <button class="btn secondary" onclick="go(6)">← Back</button>
-  <button class="btn" onclick="go(8)">Final Wish →</button>
- </div>
 </section>
 
 <!-- SLIDE 9: FINAL WISH -->
-<section class="slide center">
- <div class="progress"><span style="width:100%"></span></div>
- <div class="kicker">One last little surprise</div>
- <h2>Final Wish 💌</h2>
- <div class="envelope" id="envelope" onclick="openLetter()">💌</div>
- <p id="tap-hint">Tap the envelope to open your final message</p>
- <img class="final-photo" id="final-photo"
- src="Screenshot_20261101_102242_Gallery.jpg"
- alt="A special memory">
- <div class="note" id="final-message" style="display:none;text-align:left">
-Hello..!!
+<section class="slide">
+  <div class="panel">
+    <h1>One Last Surprise 💖</h1>
+    <p>Open the envelope to reveal your final message!</p>
 
-Good morning..!!
-Good afternoon..!!
-Good evening..!!
+    <button class="envelope" onclick="openFinal()">💌</button>
+    <h3>Tap to Open</h3>
 
-My bestestestest Friend my beautiful dolphin and cute someone special....
+    <div id="finalMessage">
+      <h2>My Beautiful Dolphin!</h2>
 
-I hope aapko ye mera chota sa surprise aacha laga hoga ! Yaar agar kuch aacha nahi laga ho toh uske liye please gussa mat hona ! Mai aapko kinderjoy khila dunga ! But i hope aapko sab aacha laga hoga ! Iska review mujhe please Instagram chats pe de dena ! Ye little effort sirf maine aapke liye hii lagaya hai !
- </div>
- <div class="nav">
-  <button class="btn secondary" onclick="go(7)">← Back</button>
-  <button class="btn" onclick="go(0)">Home ↺</button>
- </div>
+      <p>
+        Hello..!!<br><br>
+
+        Good morning..!!<br>
+        Good afternoon..!!<br>
+        Good evening..!!<br><br>
+
+        My bestestestest Friend my beautiful dolphin and
+        cute someone special....<br><br>
+
+        I hope aapko ye mera chota sa surprise aacha laga
+        hoga ! Yaar agar kuch aacha nahi laga ho toh uske
+        liye please gussa mat hona ! Mai aapko kinderjoy
+        khila dunga ! But i hope aapko sab aacha laga hoga !
+        Iska review mujhe please Instagram chats pe de dena !
+        Ye little effort sirf maine aapke liye hii lagaya hai !
+      </p>
+
+      <img
+        class="photo"
+        id="finalPhoto"
+        src="Screenshot_20261101_102242_Gallery.jpg"
+        alt="Final memory"
+      >
+
+      <p>Thank you for being you! 🌸</p>
+      <h2>YOUR ALIEN</h2>
+    </div>
+  </div>
+
+  <div class="navigation">
+    <button onclick="go(7)">Back</button>
+    <button onclick="go(0)">Home</button>
+  </div>
 </section>
 
-</main>
-
 <script>
-// IMPORTANT: ALL 9 PHOTOS ARE IN THE REPOSITORY ROOT.
-// THEREFORE, DO NOT ADD "images/" BEFORE THESE FILENAMES.
-
+/* ALL PHOTO FILENAMES */
 const files = [
   'Screenshot_20261101_102058_Gallery.jpg',
   'Screenshot_20261101_102102_Gallery.jpg',
@@ -296,244 +466,232 @@ const files = [
   'Screenshot_20261101_102242_Gallery.jpg'
 ];
 
-const photoPath = file => encodeURI(file);
-
-// SLIDE NAVIGATION
-function go(number){
- document.querySelectorAll('.slide').forEach((slide,index)=>{
-  slide.classList.toggle('active',index===number);
- });
+/* SLIDE NAVIGATION */
+function go(number) {
+  document.querySelectorAll('.slide').forEach((slide, index) => {
+    slide.classList.toggle('active', index === number);
+  });
+  window.scrollTo(0, 0);
 }
 
-// PHOTO SCRAPBOOK: FIRST FOUR PHOTOS
-const scrapbook=document.getElementById('scrapbook');
-
-for(let i=0;i<4;i++){
- const box=document.createElement('div');
- box.className='tile';
-
- box.innerHTML=`
-  <div>Memory ${i+1} 🌸</div>
-  <img class="photo" src="${files[i]}" alt="Scrapbook memory ${i+1}">
-  <button class="btn secondary reveal-button">Reveal photo</button>
- `;
-
- const img=box.querySelector('img');
- const btn=box.querySelector('button');
-
- btn.onclick=()=>{
-  img.classList.add('show');
-  btn.textContent='Memory revealed ✓';
- };
-
- scrapbook.appendChild(box);
+/* GENERAL MESSAGE REVEAL */
+function reveal(id) {
+  const element = document.getElementById(id);
+  if (element) {
+    element.classList.toggle('show');
+  }
 }
 
-// GARDEN OF COMPLIMENTS
-const poems=[
-`Na chand ki chahat, na sitaaron ki farmaish hai,
-Bas teri dosti rahe, itni si khwahish hai,
-Tu hasti rahe hamesha yunhi,
-Teri smile hi toh sabse pyari numaish hai.`,
+/* PHOTO SCRAPBOOK */
+const scrapbook = document.getElementById('scrapbook');
 
-`Teri saadgi mein bhi ek alag andaaz hai,
-Teri baaton mein jaise koi meetha sa raaz hai,
-Khoobsurati ki tareef toh sab karte hain,
-Par tera nature hi tera sabse haseen andaaz hai.`,
+for (let i = 0; i < 4; i++) {
+  const box = document.createElement('div');
+  box.className = 'tile';
 
-`Na rishton ka naam zaroori hai,
-Na har baat ka paigaam zaroori hai,
-Bas kuch log dil mein jagah bana lete hain,
-Unka zindagi mein hona hi khaas zaroori hai.`,
+  const img = document.createElement('img');
+  img.className = 'photo';
+  img.src = encodeURI(files[i]);
+  img.alt = 'Scrapbook memory ' + (i + 1);
 
-`Kabhi attitude dikhati hai, kabhi pyaar jatati hai,
-Bina baat ke mera dimaag khati hai,
-Khud ko samajhti hai Miss Universe ki queen,
-Par harkatein hain cartoon wali scene! 😅`
+  const title = document.createElement('div');
+  title.textContent = 'Memory ' + (i + 1) + ' 🌸';
+
+  const btn = document.createElement('button');
+  btn.className = 'btn-secondary';
+  btn.textContent = 'Reveal Photo';
+
+  btn.addEventListener('click', function() {
+    img.classList.toggle('show');
+    btn.textContent = img.classList.contains('show')
+      ? 'Hide Photo'
+      : 'Reveal Photo';
+  });
+
+  box.appendChild(title);
+  box.appendChild(img);
+  box.appendChild(btn);
+  scrapbook.appendChild(box);
+}
+
+/* GIFT PHOTO REVEAL */
+const giftGallery = document.getElementById('giftGallery');
+
+for (let i = 0; i < 4; i++) {
+  const box = document.createElement('div');
+  box.className = 'tile';
+
+  const title = document.createElement('h3');
+  title.textContent = 'Gift Box ' + (i + 1) + ' 🎁';
+
+  const gift = document.createElement('div');
+  gift.textContent = '🎁';
+  gift.style.fontSize = '45px';
+
+  const img = document.createElement('img');
+  img.className = 'photo';
+  img.src = encodeURI(files[i + 4]);
+  img.alt = 'Gift memory ' + (i + 1);
+
+  const btn = document.createElement('button');
+  btn.textContent = 'Open Gift';
+
+  btn.addEventListener('click', function() {
+    img.classList.toggle('show');
+    btn.textContent = img.classList.contains('show')
+      ? 'Close Gift'
+      : 'Open Gift';
+  });
+
+  box.appendChild(title);
+  box.appendChild(gift);
+  box.appendChild(img);
+  box.appendChild(btn);
+  giftGallery.appendChild(box);
+}
+
+/* QUIZ DATA */
+const questions = [
+  {
+    q: 'Our favorite place?',
+    a: ['Varanasi', 'Patna', 'Delhi', 'Mumbai'],
+    correct: 'Varanasi'
+  },
+  {
+    q: 'Our favorite fast food?',
+    a: ['Pizza', 'Momos', 'Burger', 'Pasta'],
+    correct: 'Momos'
+  },
+  {
+    q: 'My bad behavior?',
+    a: ['Late sona', 'Jaldi gussa hona', 'Zyada bolna', 'Lazy hona'],
+    correct: 'Jaldi gussa hona'
+  },
+  {
+    q: 'My favorite snack?',
+    a: ['Chips', 'Kurkure', 'Popcorn', 'Chocolate'],
+    correct: 'Kurkure'
+  },
+  {
+    q: 'Our 1st meet up?',
+    a: ['Park', 'Inside the school', 'Market', 'Restaurant'],
+    correct: 'Inside the school'
+  },
+  {
+    q: 'Our second meet up?',
+    a: ['Park', 'Inside the school', 'Market', 'Restaurant'],
+    correct: 'Inside the school'
+  },
+  {
+    q: 'Aisa konsa 1st gift tha jo ki maine aapko diya tha?',
+    a: ['Keychain', 'Pen', 'Chocolate', 'Flower'],
+    correct: 'Keychain'
+  },
+  {
+    q: 'Aisa kon sa 1st gift tha jo ki aapne mujhe diya tha?',
+    a: ['Teddy', 'Keychain', 'KitKat chocolate', 'Card'],
+    correct: 'KitKat chocolate'
+  }
 ];
 
-function showPoem(index){
- const poem=document.getElementById('poem');
- poem.textContent=poems[index];
- poem.animate(
-  [{opacity:.2,transform:'translateY(8px)'},{opacity:1,transform:'none'}],
-  {duration:450}
- );
+let currentQuestion = 0;
+
+function showQuestion() {
+  const q = questions[currentQuestion];
+
+  document.getElementById('question').textContent =
+    (currentQuestion + 1) + '. ' + q.q;
+
+  document.getElementById('quizFeedback').textContent = '';
+  document.getElementById('quizCount').textContent =
+    'Question ' + (currentQuestion + 1) + ' of ' + questions.length;
+
+  const answers = document.getElementById('answers');
+  answers.innerHTML = '';
+
+  q.a.forEach(answer => {
+    const btn = document.createElement('button');
+    btn.className = 'answer';
+    btn.textContent = answer;
+
+    btn.addEventListener('click', function() {
+      if (answer === q.correct) {
+        document.getElementById('quizFeedback').textContent =
+          'Correct answer! 🎉';
+
+        currentQuestion++;
+
+        if (currentQuestion < questions.length) {
+          setTimeout(showQuestion, 700);
+        } else {
+          document.getElementById('question').textContent =
+            'Amazing! You completed all questions! 💖';
+          answers.innerHTML = '';
+          document.getElementById('quizCount').textContent =
+            'Quiz completed!';
+        }
+      } else {
+        document.getElementById('quizFeedback').textContent =
+          'Oops! Try again 😊';
+      }
+    });
+
+    answers.appendChild(btn);
+  });
 }
 
-// MEMORIES OF GIFTS: PHOTOS FIVE TO EIGHT
-const gifts=document.getElementById('gifts');
+showQuestion();
 
-for(let i=4;i<8;i++){
- const button=document.createElement('button');
- button.className='gift';
- button.innerHTML=`<span>🎁</span>Gift ${i-3}`;
-
- button.onclick=()=>{
-  button.innerHTML=`
-   <img src="${files[i]}" alt="Gift memory ${i-3}">
-   <span>Memory ${i-3} 💗</span>
-  `;
- };
-
- gifts.appendChild(button);
-}
-
-// MEMORY QUIZ
-const quiz=[
- ['Our favorite place?','Varanasi',
-  ['Varanasi','Patna','Delhi','Jaipur']],
-
- ['Our favorite fast food?','Momos',
-  ['Pizza','Momos','Burger','Noodles']],
-
- ['My bad behavior?','Jaldi gussa hona',
-  ['Late reply karna','Jaldi gussa hona','Zyada sona','Overthinking']],
-
- ['My favorite snack?','Kurkure',
-  ['Chips','Chocolate','Kurkure','Popcorn']],
-
- ['Our 1st meet up?','Inside the school',
-  ['At a cafe','Inside the school','At a park','At a mall']],
-
- ['Our second meet up?','Inside the school',
-  ['At a shop','At a park','Inside the school','At a cafe']],
-
- ['Aisa konsa 1st gift tha jo ki maine aapko diya tha?','Keychain',
-  ['Pen','Keychain','Flower','Chocolate']],
-
- ['Aisa kon sa 1st gift tha jo ki aapne mujhe diya tha?','KitKat chocolate',
-  ['Keychain','Notebook','KitKat chocolate','Teddy']]
+/* SECRET MESSAGES */
+const secrets = [
+  'Bas itni si wish hai ki tumhari smile hamesha bani rahe, kyunki tumhari khushi dekhkar din aur bhi achha lagta hai.',
+  'Har insaan ki apni ek alag pehchaan hoti hai, aur tumhara apna andaaz tumhe sach mein special banata hai.',
+  'Kuch moments chhote hote hain, par unki yaadein bahut pyaari ban jaati hain. Tumhare saath bitaye moments bhi unmein se hain.',
+  'Life mein chahe kitni bhi difficulties aayein, apni kindness aur apni beautiful personality kabhi mat khona. Keep shining!',
+  'Thank you meri life mein itni saari cute memories aur little happiness add karne ke liye.',
+  'Chahe hum kitni bhi baatein karein ya kabhi-kabhi misunderstandings ho jaayein, meri taraf se tumhare liye respect aur good wishes hamesha rahengi.',
+  'Tumhare har naye din mein thodi si extra happiness, dher saari success aur bahut saari beautiful memories aayein.',
+  'Tumhe shayad pata na ho, lekin tumhari presence meri ordinary si days ko bhi thoda memorable bana deti hai.'
 ];
 
-let questionIndex=0;
-let questionLocked=false;
+const secretGallery = document.getElementById('secretGallery');
 
-function renderQuestion(){
- const current=quiz[questionIndex];
+secrets.forEach((message, index) => {
+  const box = document.createElement('div');
+  box.className = 'tile';
 
- document.getElementById('q-count').textContent=
-  `Question ${questionIndex+1} of 8`;
+  const title = document.createElement('h3');
+  title.textContent = 'Secret Message ' + (index + 1) + ' 💌';
 
- document.getElementById('question').textContent=current[0];
- document.getElementById('toast').textContent='';
+  const content = document.createElement('div');
+  content.className = 'message';
+  content.textContent = message;
 
- const area=document.getElementById('answers');
- area.innerHTML='';
- questionLocked=false;
+  const btn = document.createElement('button');
+  btn.textContent = 'Reveal Message';
 
- current[2].forEach(option=>{
-  const button=document.createElement('button');
-  button.className='answer';
-  button.textContent=option;
+  btn.addEventListener('click', function() {
+    content.classList.toggle('show');
+    btn.textContent = content.classList.contains('show')
+      ? 'Hide Message'
+      : 'Reveal Message';
+  });
 
-  button.onclick=()=>{
-   if(questionLocked)return;
-
-   if(option===current[1]){
-    questionLocked=true;
-    button.classList.add('correct');
-
-    document.getElementById('toast').textContent=
-     questionIndex===7
-     ?'Perfect! You completed the arena! 🎉'
-     :'Correct! Next question unlocked ✨';
-
-    setTimeout(()=>{
-     if(questionIndex<7){
-      questionIndex++;
-      renderQuestion();
-     }else{
-      document.getElementById('question').textContent=
-       'You did it! All memories unlocked! 💗';
-      document.getElementById('q-count').textContent=
-       'All 8 questions completed!';
-      area.innerHTML='';
-     }
-    },900);
-
-   }else{
-    button.classList.add('wrong');
-    document.getElementById('toast').textContent=
-     'Not quite! Try again 💫';
-
-    setTimeout(()=>button.classList.remove('wrong'),300);
-   }
-  };
-
-  area.appendChild(button);
- });
-}
-
-renderQuestion();
-
-// SECRET MESSAGE LIBRARY
-const messages=[
-'Bas itni si wish hai ki tumhari smile hamesha bani rahe, kyunki tumhari khushi dekhkar din aur bhi achha lagta hai.',
-
-'Har insaan ki apni ek alag pehchaan hoti hai, aur tumhara apna andaaz tumhe sach mein special banata hai.',
-
-'Kuch moments chhote hote hain, par unki yaadein bahut pyaari ban jaati hain. Tumhare saath bitaye moments bhi unmein se hain.',
-
-'Life mein chahe kitni bhi difficulties aayein, apni kindness aur apni beautiful personality kabhi mat khona. Keep shining!',
-
-'Thank you meri life mein itni saari cute memories aur little happiness add karne ke liye.',
-
-'Chahe hum kitni bhi baatein karein ya kabhi-kabhi misunderstandings ho jaayein, meri taraf se tumhare liye respect aur good wishes hamesha rahengi.',
-
-'Tumhare har naye din mein thodi si extra happiness, dher saari success aur bahut saari beautiful memories aayein.',
-
-'Tumhe shayad pata na ho, lekin tumhari presence meri ordinary si days ko bhi thoda memorable bana deti hai.'
-];
-
-const secrets=document.getElementById('secrets');
-
-messages.forEach((message,index)=>{
- const card=document.createElement('div');
- card.className='secret';
-
- card.innerHTML=`
-  <button>
-   <span class="front">💗 Secret ${index+1}<br><small>Tap to reveal</small></span>
-   <span class="inside">${message}</span>
-  </button>
- `;
-
- card.querySelector('button').onclick=()=>{
-  card.classList.toggle('open');
- };
-
- secrets.appendChild(card);
+  box.appendChild(title);
+  box.appendChild(btn);
+  box.appendChild(content);
+  secretGallery.appendChild(box);
 });
 
-// WISH CARDS
-function toggleWish(button){
- button.parentElement.classList.toggle('open');
-}
-
-// FINAL ENVELOPE AND PHOTO
-function openLetter(){
- document.getElementById('envelope').style.display='none';
- document.getElementById('tap-hint').style.display='none';
- document.getElementById('final-photo').style.display='block';
- document.getElementById('final-message').style.display='block';
-}
-
-// BACKGROUND STARS
-const starArea=document.getElementById('stars');
-
-for(let i=0;i<65;i++){
- const star=document.createElement('i');
- star.className='star';
- star.style.left=Math.random()*100+'%';
- star.style.top=Math.random()*100+'%';
- star.style.animationDelay=Math.random()*3+'s';
- star.style.opacity=.2+Math.random()*.7;
- starArea.appendChild(star);
+/* FINAL ENVELOPE */
+function openFinal() {
+  document.getElementById('finalMessage').classList.add('show');
+  document.getElementById('finalPhoto').classList.add('show');
 }
 </script>
 
 </body>
 </html>
+
 
 
